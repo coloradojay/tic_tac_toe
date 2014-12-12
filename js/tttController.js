@@ -11,32 +11,38 @@ function tttCtrlFunc($firebase) {
 
   self.player1 = "";
   self.player2 = "";
-  self.playerTurn = playerTurn;
   self.gameBoard = ['','','','','','','','',''];
   self.turnCount = 0;
+  self.playerTurn = playerTurn;
 
   function playerTurn($index){
     console.log(self.turnCount);
     if (self.gameBoard[$index] === ''){
-      //If the gameboard space is taken, the player cannot move into the space
+      // If the game board space is empty, ok to play the game
       if (self.turnCount % 2 === 0){
         self.gameBoard[$index] = 'X';
-        // track his position on the board and save that to the array
-        // show his game piece on the gameBoard
-        console.log(self.gameBoard);
-        console.log(self.turnCount);
-
-      }else {
+        // track p1's position on the board and save X to the array
+      }
+      else {
         self.gameBoard[$index] = 'O';
-        console.log(self.gameBoard);
+        // track p2's position on the board and save X to the array
       }
         self.turnCount++;
         // increase the turnCount by 1
-    }else { 
+    }
+    else { 
       alert("That space is taken");
+      //If the gameboard space is taken, alert the player that the space is taken
     }    
   }
 
-  
+  //game logic
+  // if turnCount = 9, game is over and clear the gameBoard array
+  // if player has 3 in a row, then alert a message saying he won
+  function gameLogic(){
+    if (turnCount === 9){
+      alert("Cat's Game");
+    }
+  }
 
 }
