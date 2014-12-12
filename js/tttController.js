@@ -7,29 +7,41 @@ function tttCtrlFunc($firebase) {
   var self = this;
 
   var ref = new Firebase("https://thelounge.firebaseio.com/game");
+
   self.sync = $firebase(ref).$asObject();
 
-  self.sync.name="name";
+  self.sync.name = "name";
   self.sync.turnCount = 0;
   self.sync.player1 = "";
   self.sync.player2 = "";
   self.sync.$save();
   //anything to be saved to firebase needs to have it's name modified to self.sync.<name>
+  
+  var gameRef = new Firebase("https://thelounge.firebasio.com/gameboard");
+  self.gameBoard = $firebase(gameRef).$asArray();
 
-  self.gameBoard = ['','','','','','','','',''];
+  function makeBoard(){
+    for (var i = 0; i < 9; i++){
+      self.gameBoard.$add('1');
+    }
+    console.log(self.gameBoard);
+  }
+  self.gameBoard.$loaded().then(makeBoard());
 
   self.playerTurn = playerTurn;
 
   function playerTurn($index){
-    console.log(self.sync.turnCount);
-    if (self.gameBoard[$index] === ''){
+    console.log(self.gameBoard[$index]);
+    if (self.gameBoard[$index].$value === '1'){
       // If the game board space is empty, ok to play the game
       if (self.sync.turnCount % 2 === 0){
-        self.gameBoard[$index] = 'X';
+        self.gameBoard[$index].$value = 'X';
+        self.gameBoard.$save(self.gameBoard[$index]);
         // track p1's position on the board and save X to the array
       }
       else {
-        self.gameBoard[$index] = 'O';
+        self.gameBoard[$index].$value = 'O';
+        self.gameBoard.$save(self.gameBoard[$index]);
         // track p2's position on the board and save X to the array
       }
         self.sync.turnCount++;
@@ -37,6 +49,7 @@ function tttCtrlFunc($firebase) {
     }
     function gameWin(){
       if (self.sync.turnCount = 9){
+        // tracking to see if the turnCount is 9 and alerting the message that it's a cat's game
         alert("Cat's Game");
       }
     }
