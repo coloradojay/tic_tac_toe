@@ -1,39 +1,41 @@
 <!DOCTYPE html>
-
-<html ng-app="tictactoeApp">
-	<head>
-		<meta charset="utf-8">
-		<title>Tic Tac Toe</title>
-
-		<!--[if lt IE 9]>
-		<script src="js/html5shiv.js"></script>
-		<![endif]-->
-		<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" href="css/normalize.css">
-		<link rel="stylesheet" href="css/style.css">
-		
-		<script src="js/angular.js"></script>
-		<script src="js/app.js"></script>
-		<!-- Gameboard is sourced before the controller because controller is dependent on gameboard -->
-		<script src="js/gameboard.js"></script> 
-		<script src="js/tictactoeController.js"></script>
-	</head>
-
-	<body ng-controller="TicTacToeController as game">
-		<div id="main">
-			<header>
-				<h1>Tic, Tac, Toe</h1>
-			</header>
-			<!--Calling Gameboard -->
-			<section id = "active-board">
-				<div class="game-board">
-					<div class="board-tile" 
-						ng-repeat="tile in game.activeBoard.tiles track by $index" 
-						ng-class="game.activeBoard.getTileState($index)"
-						ng-click="game.activeBoard.toggleTile($index)">
-					{{$index}}</div>
-				</div>
-			</section>
-		</div>
-	</body>
+<html ng-app="tttApp" >
+    <head>
+        <title>Tic Tac Toe</title>
+        <link rel="stylesheet" type="text/css" href="css/normalize.css"/>
+        <link rel="stylesheet" type="text/css" href="css/main.css"/>
+        <!-- Angular -->
+        <script src="js/angular.js"></script>
+        <!-- Firebase -->
+        <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
+        <!-- AngularFire -->
+        <script src="https://cdn.firebase.com/libs/angularfire/0.9.0/angularfire.min.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/tttController.js"></script>
+    </head>
+    <body ng-controller="tttController as tttCtrl">
+        <div id="main">
+            <header>
+                <h1>Tic Tac Toe</h1>
+            </header>
+            <section id="playernames">
+                <div id="player1name">
+                    <input type="text" placeholder="Enter name" ng-model="tttCtrl.player1">
+                </div>
+                <div id="player2name">
+                    <input type="text" placeholder="Enter name" ng-model="tttCtrl.player2">
+                </div>
+            </section>
+            <section id="active-board">
+                <div id="game-board">
+                    <div class="board-tile"
+                    ng-repeat="t in tttCtrl.gameBoard track by $index"
+                    ng-click="tttCtrl.playerTurn($index)"
+                    >
+                        {{t}}
+                    </div>
+                </div>
+            </section>
+        </div>
+    </body>
 </html>

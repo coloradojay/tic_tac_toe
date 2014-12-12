@@ -1,0 +1,22 @@
+pseudo code notes.txt
+gameboard
+	- tiles
+	- tile state
+
+game
+	- determine number of players
+	- determine player turns
+		- who's turn it is
+		- alert if it's not your turn and you try to make a move
+	- display moves
+		- past moves
+		- store current moves
+	- determine winner
+		- alert winner that they've won
+		- alert loser that they've lost
+		- alert both players if it's a tie
+
+players
+	- set player1 as player1
+	- set player2 as player2
+	- 
