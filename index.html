@@ -14,16 +14,17 @@
         <script src="js/tttController.js"></script>
     </head>
     <body ng-controller="tttController as tttCtrl">
+    <h1>{{tttCtrl.sync}}</h1>
         <div id="main">
             <header>
                 <h1>Tic Tac Toe</h1>
             </header>
             <section id="playernames">
-                <div id="player1name">
-                    <input type="text" placeholder="Enter name" ng-model="tttCtrl.player1">
+                <div class="player1name">
+                    <input type="text" placeholder="Player 1" ng-model="tttCtrl.player1">
                 </div>
-                <div id="player2name">
-                    <input type="text" placeholder="Enter name" ng-model="tttCtrl.player2">
+                <div class="player2name">
+                    <input type="text" placeholder="Player 2" ng-model="tttCtrl.player2">
                 </div>
             </section>
             <section id="active-board">
