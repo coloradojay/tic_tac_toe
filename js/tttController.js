@@ -16,9 +16,9 @@ function tttCtrlFunc($firebase) {
   self.sync.player2 = "";
   self.sync.$save();
   //anything to be saved to firebase needs to have it's name modified to self.sync.<name>
-  
-  var gameRef = new Firebase("https://thelounge.firebasio.com/gameboard");
-  self.gameBoard = $firebase(gameRef).$asArray();
+
+  var ref1 = new Firebase("https://thelounge.firebaseio.com/gameboard");
+  self.gameBoard = $firebase(ref1).$asArray();
 
   function makeBoard(){
     for (var i = 0; i < 9; i++){
@@ -29,6 +29,7 @@ function tttCtrlFunc($firebase) {
   self.gameBoard.$loaded().then(makeBoard());
 
   self.playerTurn = playerTurn;
+
 
   function playerTurn($index){
     console.log(self.gameBoard[$index]);
@@ -47,6 +48,8 @@ function tttCtrlFunc($firebase) {
         self.sync.turnCount++;
         // increase the turnCount by 1
     }
+
+
     function gameWin(){
       if (self.sync.turnCount = 9){
         // tracking to see if the turnCount is 9 and alerting the message that it's a cat's game

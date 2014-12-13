@@ -32,8 +32,9 @@
                     <div class="board-tile"
                     ng-repeat="t in tttCtrl.gameBoard track by $index"
                     ng-click="tttCtrl.playerTurn($index)"
+                    
                     >
-                        {{t}}
+                    {{t.$value == 1 ? '' : t.$value}}
                     </div>
                 </div>
             </section>
