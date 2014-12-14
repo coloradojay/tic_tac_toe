@@ -70,4 +70,3 @@ We'll also be looking at:
 
 * Quality of communication around decision-making. Can you defend why you implemented your solution in a certain way? Can you think through alternative implementations?
 * Your ability to pick up new technologies and push yourself. How did you approach the AngularJS framework and extend your learning into a working game?
-
