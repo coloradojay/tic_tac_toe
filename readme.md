@@ -53,7 +53,7 @@ These are for extra credit! Don't focus on these until you've hit the core requi
 * Demo day: Monday, Week 4 - **December 15, 2014**
 * Code reviews: Week 5
 
-**Something to keep in mind:** you don't have to create your new app on the very first day of a project cycle. In fact, many students in previous WDI programs have waited until week 4 to begin their "real" game code (and chose to work on smaller parts of the app independently). 
+**Something to keep in mind:** you don't have to create your new app on the very first day of a project cycle. In fact, many students in previous WDI programs have waited until week 4 to begin their "real" game code (and chose to work on smaller parts of the app independently).
 
 Work through the lessons in-class, ask questions and come to office hours when you need to, and add code to your Tic Tac Toe game afterwards.
 

@@ -3,98 +3,76 @@ angular
   .controller('tttController', tttCtrlFunc);
 
 function tttCtrlFunc($firebase) {
-
   var self = this;
-
-  var ref = new Firebase("https://thelounge.firebaseio.com/game");
-
+  var ref = new Firebase("https://thefiringsquad.firebaseio.com/game");
   self.sync = $firebase(ref).$asObject();
-
-  self.sync.name = "name";
+  // Saving the FB db as an Object
+  self.sync.tiles =['','','','','','','','',''];
+  // Creating 9 tiles and setting each tile value to 1
+  self.sync.play = true;
+  // Setting the initial value of the game to true, important check throughout the game
   self.sync.turnCount = 0;
-  self.sync.player1 = "";
-  self.sync.player2 = "";
+  // Counter of player moves
+  self.sync.player1Name = '';
+  // Placeholder for Player 1's name
+  self.sync.player2Name = '';
+  // Placeholder for Player 2's name
+  self.sync.gameName = "Tic Tac Toe";
+  // Setting the game name
   self.sync.$save();
-  //anything to be saved to firebase needs to have it's name modified to self.sync.<name>
 
-  var ref1 = new Firebase("https://thelounge.firebaseio.com/gameboard");
-  self.gameBoard = $firebase(ref1).$asArray();
-
-  function makeBoard(){
-    for (var i = 0; i < 9; i++){
-      self.gameBoard.$add('1');
-    }
-    console.log(self.gameBoard);
-  }
-  self.gameBoard.$loaded().then(makeBoard());
-
-  self.playerTurn = playerTurn;
-
-
-  function playerTurn($index){
-    console.log(self.gameBoard[$index]);
-    if (self.gameBoard[$index].$value === '1'){
-      // If the game board space is empty, ok to play the game
-      if (self.sync.turnCount % 2 === 0){
-        self.gameBoard[$index].$value = 'X';
-        self.gameBoard.$save(self.gameBoard[$index]);
-        // track p1's position on the board and save X to the array
-      }
-      else {
-        self.gameBoard[$index].$value = 'O';
-        self.gameBoard.$save(self.gameBoard[$index]);
-        // track p2's position on the board and save X to the array
-      }
+  self.playerTurn = function(i) {
+    if (self.sync.play) {
+      // Assumes that self.sync.play is set to true
+      if (self.sync.turnCount % 2 == 0 ) {
+        self.sync.tiles[i] = 'X';
+        // Saves Player 1's value of X
         self.sync.turnCount++;
-        // increase the turnCount by 1
-    }
-
-
-    function gameWin(){
-      if (self.sync.turnCount = 9){
-        // tracking to see if the turnCount is 9 and alerting the message that it's a cat's game
-        alert("Cat's Game");
+        //Increases the turncount by one with each pass
+        self.sync.$save();
+      } 
+      else if (self.sync.turnCount % 2 == 1) {
+        self.sync.tiles[i] = 'O';
+        // Saves Player 2's value of O
+        self.sync.turnCount++;
+        self.sync.$save();
       }
+       checkWin(); // on ng-click checks for a winner
     }
- 
-  }
+  };
 
-  //game logic
-  // if turnCount = 9, game is over and clear the gameBoard array
-  // if player has 3 in a row, then alert a message saying he won
-  // function gameLogic(){
-  //   if (turnCount === 9){
-  //     alert("Cat's Game");
-  //   }
-  // }
-      // var isWinCombo = function(cell1, cell2, cell3, player) {
-      //       if (($scope.game.cells[cell1] === player) &&
-      //           ($scope.game.cells[cell2] === player) && 
-      //           ($scope.game.cells[cell3] === player)) {
-      //           return true;
-      //       } else {
-      //           return false;
-      //       }
-      //     };
-      // var winnerIsX = function() {
-      //   return (isWinCombo(0, 1, 2, "X") ||
-      //       isWinCombo(3, 4, 5, "X") || 
-      //       isWinCombo(6, 7, 8, "X") ||
-      //       isWinCombo(0, 3, 6, "X") ||
-      //       isWinCombo(1, 4, 7, "X") || 
-      //       isWinCombo(2, 5, 8, "X") ||
-      //       isWinCombo(0, 4, 8, "X") ||
-      //       isWinCombo(2, 4, 6, "X"));
-      // };
+  function checkWin() {
+    var squares = self.sync.tiles;
+    // Setting the tiles saved in FB to a local variable
 
-      // var winnerIsO = function() {
-      //   return (isWinCombo(0, 1, 2, "O") ||
-      //       isWinCombo(3, 4, 5, "O") || 
-      //       isWinCombo(6, 7, 8, "O") ||
-      //       isWinCombo(0, 3, 6, "O") ||
-      //       isWinCombo(1, 4, 7, "O") || 
-      //       isWinCombo(2, 5, 8, "O") ||
-      //       isWinCombo(0, 4, 8, "O") ||
-      //       isWinCombo(2, 4, 6, "O"));
-      // };
+    var winners = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+
+    // Listing all of the winning tile combinations
+    // 0 |  1  |  2
+    // -------------
+    // 3 |  4  |  5
+    // -------------
+    // 6 |  7  |  8
+
+    for (var i = 0; i< winners.length; i++) {
+      // Comparision of tiles to the winning combos for Player 1
+      if ((squares[winners[i][0]] == 'X' && squares[winners[i][1]] == 'X' && squares[winners[i][2]] == 'X')) {
+        self.sync.play = false;
+        // Sets the play variable from true to false as the game is over
+        self.sync.$save();
+        alert("Player 1 Wins!");
+      } // Comparision for Player 2
+      else if ((squares[winners[i][0]] == 'O' && squares[winners[i][1]] == 'O' && squares[winners[i][2]] == 'O')) {
+        self.sync.play = false;
+        // Sets the play variable from true to false as the game is over        
+        self.sync.$save();
+        alert("Player 2 Wins!");
+        }
+    }
+    if (self.sync.play && self.sync.turnCount == 9) {
+        self.sync.play = false;
+        self.sync.$save();
+        alert("Cat's Game!");
+    }
+  };
 }

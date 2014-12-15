@@ -3,6 +3,10 @@ body {
     background-color: #C6C2AD;
 }
 
+header {
+    text-align: center;
+}
+
 header > h1 {
     font-size: 48px;
     margin: 10px;
@@ -54,4 +58,5 @@ header > h1 {
     border-radius: 15px;
     margin: 0 5px 5px 0;
     background-color: white;
+    font-size: 100px;
 }
