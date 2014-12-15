@@ -68,3 +68,6 @@ header > h1 {
     background-color: white;
     font-size: 100px;
 }
+#gameClearbtn {
+    border-radius: 15px;
+}

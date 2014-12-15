@@ -20,10 +20,11 @@ function tttCtrlFunc($firebase) {
   self.sync.gameName = "Tic Tac Toe";
   // Setting the game name
   self.sync.$save();
+  
+  var checkPlayer;
+  // Creating a player check variable, has to be set outside of the playerTurn function
 
   self.playerTurn = function(i) {
-    var checkPlayer;
-    // Creating a player check variable
     if (self.sync.play) {
       // Assumes that self.sync.play is set to true
       if (self.sync.turnCount % 2 == 0 && self.sync.tiles[i] === '' && checkPlayer != 'O')
