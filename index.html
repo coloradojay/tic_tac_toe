@@ -16,25 +16,28 @@
   <body ng-controller="tttController as tttCtrl">
     <div id="main">
         <header>
-            <h1>{{tttCtrl.sync.gameName}}</h1>
+          <h1>{{tttCtrl.sync.gameName}}</h1>
         </header>
         <section id="playernames">
-            <div class="player1name">
-                <input type="text" placeholder="Player 1" ng-model="tttCtrl.sync.player1Name" ng-change="tttCtrl.sync.player1name.save()">
-            </div>
-            <div class="player2name">
-                <input type="text" placeholder="Player 2" ng-model="tttCtrl.sync.player2Name">
-            </div>
+          <div class="player1name">
+              <input type="text" placeholder="Player 1" ng-model="tttCtrl.sync.player1Name" ng-change="tttCtrl.sync.player1name.save()">
+          </div>
+          <div class="player2name">
+              <input type="text" placeholder="Player 2" ng-model="tttCtrl.sync.player2Name">
+          </div>
         </section>
         <section id="active-board">
-            <div id="game-board">
-                <div class="board-tile"
-                ng-repeat="tile in tttCtrl.sync.tiles track by $index"
-                ng-click="tttCtrl.playerTurn($index)"
-                >
-                {{tile}}
-                </div>
-            </div>
+          <div id="game-board">
+              <div class="board-tile"
+              ng-repeat="tile in tttCtrl.sync.tiles track by $index"
+              ng-click="tttCtrl.playerTurn($index)"
+              >
+              {{tile}}
+              </div>
+          </div>
+        </section>
+        <section id="gameClearbtn">
+          <button ng-click="tttCtrl.clearBoard()">Clear</button>
         </section>
     </div>
   </body>

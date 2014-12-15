@@ -1,6 +1,9 @@
 body {
     font-family: 'Lobster', cursive;
-    background-color: #C6C2AD;
+/*    background-color: #C6C2AD;*/
+    background: ##959a8f;
+    background-image: url("../img/bg-1.png"), url("../img/bg-2.png");
+    background-repeat: repeat-x, repeat;
 }
 
 header {
@@ -10,11 +13,14 @@ header {
 header > h1 {
     font-size: 48px;
     margin: 10px;
+    text-shadow: 4px 4px 2px rgba(149, 170, 137, 0.6);
+    color: white;
 }
 
 #playernames {
     max-width: 600px;
     margin: 0 auto;
+    display: block;
 }
 
 .player1name{
@@ -23,15 +29,17 @@ header > h1 {
 
 .player1name > input {
     border-radius: 15px;
+    width: 200px;
 }
 
 .player2name{
     float: right;
-    margin-right: 55px;
 }
 
 .player2name > input {
     border-radius: 15px;
+    margin-right: 55px;
+    width: 200px;
 }
 
 #main {

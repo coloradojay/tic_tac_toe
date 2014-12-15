@@ -22,18 +22,25 @@ function tttCtrlFunc($firebase) {
   self.sync.$save();
 
   self.playerTurn = function(i) {
+    var checkPlayer;
+    // Creating a player check variable
     if (self.sync.play) {
       // Assumes that self.sync.play is set to true
-      if (self.sync.turnCount % 2 == 0 ) {
-        self.sync.tiles[i] = 'X';
-        // Saves Player 1's value of X
+      if (self.sync.turnCount % 2 == 0 && self.sync.tiles[i] === '' && checkPlayer != 'O')
+        // If the tile is empty and the checkPlayer value is not O, then X can set a piece on the board
+       {
+        checkPlayer = 'X';
+        self.sync.tiles[i] = checkPlayer;
+        // Sets Player 1's game piece to X
         self.sync.turnCount++;
         //Increases the turncount by one with each pass
         self.sync.$save();
       } 
-      else if (self.sync.turnCount % 2 == 1) {
-        self.sync.tiles[i] = 'O';
-        // Saves Player 2's value of O
+      else if (self.sync.turnCount % 2 == 1 && self.sync.tiles[i] === '' && checkPlayer != 'X') {
+        // If the tile is empty and the checkPlayer value is not O, then X can set a piece on the board
+        checkPlayer = 'O';
+        self.sync.tiles[i] = checkPlayer;
+        // Sets Player 2's game piece to O
         self.sync.turnCount++;
         self.sync.$save();
       }
@@ -75,4 +82,10 @@ function tttCtrlFunc($firebase) {
         alert("Cat's Game!");
     }
   };
+  self.clearBoard = function() {
+    self.sync.tiles =['','','','','','','','',''];
+    self.sync.play = true;
+    self.sync.turnCount = 0;
+    self.sync.$save();
+  }
 }
