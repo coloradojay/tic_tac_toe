@@ -20,7 +20,7 @@ function tttCtrlFunc($firebase) {
   self.sync.gameName = "Tic Tac Toe";
   // Setting the game name
   self.sync.$save();
-  
+
   var checkPlayer;
   // Creating a player check variable, has to be set outside of the playerTurn function
 
@@ -76,14 +76,17 @@ function tttCtrlFunc($firebase) {
         self.sync.$save();
         alert("Player 2 Wins!");
         }
-    }
+    } // Cat's Game Logic
     if (self.sync.play && self.sync.turnCount == 9) {
+      // Checks to see if the play variable is set to true and the turn count is 9
         self.sync.play = false;
+        // Changes the play variable to false, stopping the game
         self.sync.$save();
         alert("Cat's Game!");
     }
   };
   self.clearBoard = function() {
+    // Reset's the FB object items back to their original state
     self.sync.tiles =['','','','','','','','',''];
     self.sync.play = true;
     self.sync.turnCount = 0;
