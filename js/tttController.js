@@ -81,7 +81,7 @@ function tttCtrlFunc($firebase) {
       // Checks to see if the play variable is set to true and the turn count is 9
         self.sync.play = false;
         // Changes the play variable to false, stopping the game
-        self.sync.$save();
+        self.sync.$save();        
         alert("Cat's Game!");
     }
   };
