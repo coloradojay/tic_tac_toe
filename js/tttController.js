@@ -19,6 +19,8 @@ function tttCtrlFunc($firebase) {
   // Placeholder for Player 2's name
   self.sync.gameName = "Tic Tac Toe";
   // Setting the game name
+  self.sync.winningMessage = '';
+  // Setting the placeholder of the winning message
   self.sync.$save();
 
   var checkPlayer;
@@ -67,22 +69,25 @@ function tttCtrlFunc($firebase) {
       if ((squares[winners[i][0]] == 'X' && squares[winners[i][1]] == 'X' && squares[winners[i][2]] == 'X')) {
         self.sync.play = false;
         // Sets the play variable from true to false as the game is over
+        self.sync.winningMessage = 'Player 1 Wins!';
         self.sync.$save();
-        alert("Player 1 Wins!");
+        // alert("Player 1 Wins!");
       } // Comparision for Player 2
       else if ((squares[winners[i][0]] == 'O' && squares[winners[i][1]] == 'O' && squares[winners[i][2]] == 'O')) {
         self.sync.play = false;
-        // Sets the play variable from true to false as the game is over        
+        // Sets the play variable from true to false as the game is over  
+        self.sync.winningMessage = 'Player 2 Wins!';      
         self.sync.$save();
-        alert("Player 2 Wins!");
+        // alert("Player 2 Wins!");
         }
     } // Cat's Game Logic
     if (self.sync.play && self.sync.turnCount == 9) {
       // Checks to see if the play variable is set to true and the turn count is 9
         self.sync.play = false;
         // Changes the play variable to false, stopping the game
+        self.sync.winningMessage = 'Cats Game!';
         self.sync.$save();        
-        alert("Cat's Game!");
+        // alert("Cat's Game!");
     }
   };
   self.clearBoard = function() {
