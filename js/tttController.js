@@ -95,6 +95,7 @@ function tttCtrlFunc($firebase) {
     self.sync.tiles =['','','','','','','','',''];
     self.sync.play = true;
     self.sync.turnCount = 0;
+    self.sync.winningMessage = '';
     self.sync.$save();
   }
 }
