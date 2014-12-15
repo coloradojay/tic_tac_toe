@@ -23,6 +23,8 @@
           <div class="player1name">
               <input type="text" placeholder="Player 1" ng-model="tttCtrl.sync.player1Name" ng-change="tttCtrl.sync.player1Name.save(tttCtrl.sync.player1Name)">
           </div>
+          <div>
+            <button id="gameClearbtn" ng-click="tttCtrl.clearBoard()">Start New Game</button>
           <div class="player2name">
               <input type="text" placeholder="Player 2" ng-model="tttCtrl.sync.player2Name">
           </div>
@@ -37,9 +39,6 @@
               {{tile}}
               </div>
           </div>
-        </section>
-        <section id="gameClearbtn">
-          <button ng-click="tttCtrl.clearBoard()">Clear</button>
         </section>
     </div>
   </body>
